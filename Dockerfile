@@ -6,4 +6,4 @@ COPY . .
 
 RUN pip install -r requirements.txt
 
-CMD exec gunicorn --bind :$PORT "app:create_app()"
+CMD exec gunicorn --bind :$PORT "app:CREATE_APP()"
