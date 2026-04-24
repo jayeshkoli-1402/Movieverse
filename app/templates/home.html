@@ -8,17 +8,46 @@
 <body>
 
     <h1>Movie Recommendation System</h1>
-    <h4>Name Format: "Movie_Name (year)"</h4>
+    <span>spelling mistakes can lead to errors</span>
     <form method="POST">
-        <input type="text" name="movie" placeholder="Enter movie name" required>
+        <input type="text" name="movie" placeholder="Enter movie name" value="{{ query }}" required>
         <button type="submit">Recommend</button>
     </form>
 
+
     <h2>Recommendations:</h2>
     <ul>
-        <h2> {{recommendations}} </h2>
+        {% for movie in reccomendation %}
+        <li>{{ movie }}</li>
+        {% endfor %}
     </ul>
 
-</body>
+    <style>
+        .scroll-box {
+            height: 300px;
+            /* fixed height */
+            overflow-y: scroll;
+            /* vertical scroll */
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+    </style>
+    </head>
+
+    <body>
+        <br>
+        <br>
+        <h2>Movie Dataset for direct copy paste search</h2>
+
+        <div class="scroll-box">
+            {{ table|safe }}
+        </div>
+
+    </body>
 
 </html>

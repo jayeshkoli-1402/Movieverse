@@ -1,17 +1,15 @@
-from flask import Blueprint, Flask, redirect, render_template, url_for, session, request
-from app.model import recommend
-route = Blueprint("route_bp", __name__)
+from flask import Flask, redirect, render_template, url_for, session, Blueprint, request
+from app.model import reccomend, movies
 
+route = Blueprint("route", __name__)
 
-
-
-@route.route("/", methods=["GET", "POST"])
+@route.route("/", methods = ["POST", "GET"])
 def home():
-    recommendations = []
+    title = movies["title"].to_frame()
+    table = title.to_html(classes="table", index=False)
     if request.method == "POST":
-        movie_name = request.form.get("movie")
-        print(movie_name)
+        title = request.form.get("movie")
+        reccomendation = reccomend(title)
         
-        recommendations = recommend(movie_name)
-
-    return render_template("home.html", recommendations=recommendations)
+        return render_template("home.html", reccomendation = reccomendation, table = table)
+    return render_template("home.html", table = table)
